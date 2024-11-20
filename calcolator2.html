@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Ķermeņa masas indeksa (ĶMI) kalkulators</h1>
+
+    <label for="heightInput">Augums (metros):</label>
+    <input type="number" id="heightInput" step="0.01" placeholder="Ievadiet augumu">
+    <br><br>
+
+    <label for="weightInput">Svars (kilogramos):</label>
+    <input type="number" id="weightInput" step="0.1" placeholder="Ievadiet svaru">
+    <br><br>
+
+    <button id="calculateBtn">Aprēķināt ĶMI</button>
+    <br><br>
+
+    <p id="result"></p>
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function () {
+            const heightInput = document.getElementById('heightInput');
+            const weightInput = document.getElementById('weightInput');
+
+            const height = heightInput.value;
+            const weight = weightInput.value;
+
+            if (!height || !weight || height <= 0 || weight <= 0) {
+                document.getElementById('result').textContent = "Lūdzu, ievadiet derīgus datus!";
+                return;
+            }
+
+            const bmi = weight / (height * height);
+            let resultText = "Jūsu ĶMI ir: " + bmi.toFixed(2);
+
+            if (bmi < 18.5) {
+                resultText += " (Zems svars)";
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                resultText += " (Normāls svars)";
+            } else if (bmi >= 25 && bmi < 29.9) {
+                resultText += " (Pārmērīgs svars)";
+            } else {
+                resultText += " (Aptaukošanās)";
+            }
+
+            document.getElementById('result').textContent = resultText;
+        });
+    </script>
+</body>
+
+</html>
